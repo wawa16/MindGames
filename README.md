@@ -2,7 +2,7 @@
 Short listing names and Binary tree scripts
 
 # Task#1: Binary Tree Traversal
-As I understood, Traverse a userdefined or sample binary tree inorder (leftmost, root finally right child).<br/>
+Traverse a userdefined or sample binary tree inorder (leftmost, root finally right child).<br/>
   Approach:<br/>
     -tree is traversed inorder with LeftChildSort() function. Only LeftChildSort() & buildTree() are allowed in main 
      function.<br/>
