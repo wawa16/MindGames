@@ -15,5 +15,6 @@ As I understood that day, a function that sorts names in array, any new name if 
   -Option to collect user-input allowed along with sample data.<br/>
   -Two different ways are included for sorting, both yield same result.<br/>
   
-# Note: Pls contact if something needs clarity 
-  
+# Note: Pls contact if something needs clarity
+  -version preferred C++11
+ 
