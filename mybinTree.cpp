@@ -60,7 +60,10 @@ void buildTree(string input[], int &size){
      for(int i=0; i<size; i++){      //loops through user-input data
         
          if(root == NULL){
-             int root_key = input[i][0] - '0';   //first user-value is root
+            int root_key = input[i][0] - '0';                //first user-value is root
+             if(input[i][1] != NULL){
+                root_key = (root_key*10) + (input[i][1] - '0');
+             }
              root = new node(root_key);
              arr_[i] = root;
          } else {
@@ -107,7 +110,7 @@ int main() {
     // cout << "Enter total number of elements (nodes&children including root node):" << endl;
     // cin >> size;
     // cout << "Enter Root value first then Enter Children of Tree in proper sequence\n(e.g. LLR2 is left->left->right=2 with respect to root)" << endl;
-    // cout << "(Press Enter after each entry):" << endl;
+    // cout << "(Values could be from 0-99, Press Enter after each entry):" << endl;
     // string tree_input[size];
     // for(int i=0; i<size; i++){
     //     cin >> tree_input[i];
