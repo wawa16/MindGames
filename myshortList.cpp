@@ -13,7 +13,7 @@ int main()
     // cout << "How many names you wish to enter?" << endl;
     // cin >> names_size;
     // string names[names_size];
-    // cout << "Input " << names_size << " names(press enter after each entry):" << endl;
+    // cout << "Input " << names_size << " names(in all lower-caps, press enter after each entry):" << endl;
     // for(int i=0; i<names_size; i++){
     //     cin >> names[i];
     // }
