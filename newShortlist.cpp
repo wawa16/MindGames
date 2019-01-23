@@ -12,7 +12,7 @@ struct Sorted {
 
 void printOutput(const vector<Sorted> &);      //prints sorted output
 vector<Sorted> shortList(string[], int &size); //sorting function
-
+void arrangethis(string[], int &size);
 
 
 int main()
@@ -28,13 +28,34 @@ int main()
     
  ////For using User-Input names, Comment following array and Uncomment code above
     
-    string names[7] = {"a","b","bab", "babe", "bebe", "bebef", "beb"}; //Input Array of names
+    string names[6] = {"a","b","bab", "babe", "bgf", "bf"}; //Input Array of names
+    //string names[9] = {"a","b","bab", "babe", "bebe", "bebef", "bf", "c", "beb"}; //Input Array of names
+    
     
     int size = sizeof(names)/sizeof(names[0]);
+    arrangethis(names, size);
+
     
-    printOutput(shortList(names,size));
     
     return 0;
+}
+
+void arrangethis(string arr[], int &size){
+    int i,j;
+       for(j=0; j<size-1; j++){
+            for(i=0; i<size-1; i++){
+             if(arr[i] > arr[i+1]){
+                string z = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = z;
+             }
+        }
+      }
+    int m; 
+        for (m=0; m < size; m++) 
+            cout << arr[m] << " " << arr[m].size() << " "; 
+            
+    printOutput(shortList(arr,size));       
 }
 
 vector<Sorted> shortList(string names[], int &size){
@@ -42,11 +63,11 @@ vector<Sorted> shortList(string names[], int &size){
      std::vector<Sorted> sorted;
      int dict = 0;                  //dictionary counter
      int max_weight = 0;
-     int weight_ptr;
+
        for(int i=0; i<size; i++){
-       int count = 0;    //local counter for alphabets in each name
-       int state = 0;    //counter decides which names to be included in shortlist
-       int unique = 0;   //counter for unique letters in a name; 
+       int count = 0;               //local counter for alphabets in each name
+       int state = 0;               //counter decides which names to be included in shortlist
+       int unique = 0;              //counter for unique letters in a name; 
        int flag = 0; int update; int g_flag = 0;
        int weight = 0;
        //scan through alphabets in each name:
@@ -77,20 +98,15 @@ vector<Sorted> shortList(string names[], int &size){
                    }
                 }
                 if(g_flag == names[i].length()){
-                    update = 1;
-                } else {update = 0;}
-                //cout << flag << endl;
-                
-                if(update == 0){
-                    sorted.clear();
-                      sorted.push_back({names[i], i, weight});
-                    //short_list.push_back(names[i]);          
-                } if (update ==1){
-                    if(unique != 0){
+                     if(unique != 0){
                        sorted.push_back({names[i], i, weight});
                       //short_list.push_back(names[i]);          
                     }
+                } else {
+                      sorted.clear();
+                      sorted.push_back({names[i], i, weight});   
                 }
+                //cout << flag << endl;
            } else {
                 sorted.push_back({names[i], i, weight});
                 //short_list.push_back(names[i]);
@@ -98,26 +114,39 @@ vector<Sorted> shortList(string names[], int &size){
    
        } else if (state < dict && unique != 0){
            sorted.push_back({names[i], i, weight});
-           //short_list.push_back(names[i]);
+       } else if (state < dict && unique == 0){
+           auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
+            return p.weight == max_weight;
+            });
+          if (iterator == sorted.end()) {
+          } else {
+            //   iterator->name = names[i];
+            //   iterator->id = i;
+            //   iterator->weight = weight;
+              int index = std::distance(sorted.begin(), iterator);
+              //cout << "weight: " << iterator->weight << endl;
+              //sorted.erase(sorted.begin() + index);
+          }
+           //sorted.push_back({names[i], i, weight});
        }
-            if(weight > max_weight){
-                     auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
-                        return p.weight == max_weight;
-                        });
-                      if (iterator == sorted.end()) {
-                        // the id wasn't found
-                      } else {
-                          iterator->name = names[i];
-                          iterator->id = i;
-                          iterator->weight = weight;
-                          int index = std::distance(sorted.begin(), iterator);
-                          cout << "ID: " << index<< endl;
-                          sorted.erase(sorted.begin() + index);
-                      }
-                }
+            // if(weight > max_weight){
+            //          auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
+            //             return p.weight == max_weight;
+            //             });
+            //           if (iterator == sorted.end()) {
+            //             // the id wasn't found
+            //           } else {
+            //               iterator->name = names[i];
+            //               iterator->id = i;
+            //               iterator->weight = weight;
+            //               int index = std::distance(sorted.begin(), iterator);
+            //               cout << "ID: " << index<< endl;
+            //               sorted.erase(sorted.begin() + index);
+            //           }
+            //     }
         auto minmax_values = std::minmax_element(sorted.begin(), sorted.end(),[]
         (Sorted const& lhs, Sorted const& rhs) {return lhs.id < rhs.id;});
-        max_weight = minmax_values.second->id;
+        max_weight = minmax_values.second->weight;
         dict = dict + unique;
     }
 
