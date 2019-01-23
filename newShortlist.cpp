@@ -28,7 +28,7 @@ int main()
     
  ////For using User-Input names, Comment following array and Uncomment code above
     
-    string names[6] = {"a","b","bab", "babe", "bgf", "bf"}; //Input Array of names
+    string names[8] = {"bab", "a","b", "babe", "bf", "bgf", "bfgh", "c"}; //Input Array of names
     //string names[9] = {"a","b","bab", "babe", "bebe", "bebef", "bf", "c", "beb"}; //Input Array of names
     
     
@@ -99,21 +99,21 @@ vector<Sorted> shortList(string names[], int &size){
                 }
                 if(g_flag == names[i].length()){
                      if(unique != 0){
-                       sorted.push_back({names[i], i, weight});
+                       sorted.push_back({names[i], unique, dict-state});
                       //short_list.push_back(names[i]);          
                     }
                 } else {
                       sorted.clear();
-                      sorted.push_back({names[i], i, weight});   
+                      sorted.push_back({names[i], unique, dict-state});   
                 }
                 //cout << flag << endl;
            } else {
-                sorted.push_back({names[i], i, weight});
+                sorted.push_back({names[i], unique, dict-state});
                 //short_list.push_back(names[i]);
            }
    
        } else if (state < dict && unique != 0){
-           sorted.push_back({names[i], i, weight});
+           sorted.push_back({names[i], unique, dict-state});
        } else if (state < dict && unique == 0){
            auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
             return p.weight == max_weight;
@@ -127,7 +127,7 @@ vector<Sorted> shortList(string names[], int &size){
               //cout << "weight: " << iterator->weight << endl;
               //sorted.erase(sorted.begin() + index);
           }
-           //sorted.push_back({names[i], i, weight});
+           //sorted.push_back({names[i], state, weight});
        }
             // if(weight > max_weight){
             //          auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
@@ -149,7 +149,10 @@ vector<Sorted> shortList(string names[], int &size){
         max_weight = minmax_values.second->weight;
         dict = dict + unique;
     }
-
+    
+    for(int i=0; i<sorted.size(); i++){
+       //int 
+    }
        
     return sorted;
 }
