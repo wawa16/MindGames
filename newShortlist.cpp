@@ -12,35 +12,20 @@ struct Sorted {
 
 void printOutput(const vector<Sorted> &);      //prints sorted output
 vector<Sorted> shortList(string[], int &size); //sorting function
-void arrangethis(string[], int &size);
+void arrange(string[], int &size);
 
 
 int main()
 {
-    // int names_size;
-    // cout << "How many names you wish to enter?" << endl;
-    // cin >> names_size;
-    // string names[names_size];
-    // cout << "Input " << names_size << " names(in all lower-caps, press enter after each entry):" << endl;
-    // for(int i=0; i<names_size; i++){
-    //     cin >> names[i];
-    // }
     
- ////For using User-Input names, Comment following array and Uncomment code above
-    
-    string names[8] = {"bab", "a","b", "babe", "bf", "bgf", "bfgh", "c"}; //Input Array of names
-    //string names[9] = {"a","b","bab", "babe", "bebe", "bebef", "bf", "c", "beb"}; //Input Array of names
-    
-    
+    string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
+   // string names[6] = {"bab","bay", "ash", "doll", "dolla", "dolly"}; //Input Array of names
     int size = sizeof(names)/sizeof(names[0]);
-    arrangethis(names, size);
-
-    
-    
+    arrange(names, size);
     return 0;
 }
 
-void arrangethis(string arr[], int &size){
+void arrange(string arr[], int &size){
     int i,j;
        for(j=0; j<size-1; j++){
             for(i=0; i<size-1; i++){
@@ -51,10 +36,6 @@ void arrangethis(string arr[], int &size){
              }
         }
       }
-    int m; 
-        for (m=0; m < size; m++) 
-            cout << arr[m] << " " << arr[m].size() << " "; 
-            
     printOutput(shortList(arr,size));       
 }
 
@@ -100,66 +81,56 @@ vector<Sorted> shortList(string names[], int &size){
                 if(g_flag == names[i].length()){
                      if(unique != 0){
                        sorted.push_back({names[i], unique, dict-state});
-                      //short_list.push_back(names[i]);          
                     }
                 } else {
                       sorted.clear();
                       sorted.push_back({names[i], unique, dict-state});   
                 }
-                //cout << flag << endl;
            } else {
                 sorted.push_back({names[i], unique, dict-state});
-                //short_list.push_back(names[i]);
            }
    
-       } else if (state < dict && unique != 0){
-           sorted.push_back({names[i], unique, dict-state});
-       } else if (state < dict && unique == 0){
-           auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
-            return p.weight == max_weight;
-            });
-          if (iterator == sorted.end()) {
-          } else {
-            //   iterator->name = names[i];
-            //   iterator->id = i;
-            //   iterator->weight = weight;
-              int index = std::distance(sorted.begin(), iterator);
-              //cout << "weight: " << iterator->weight << endl;
-              //sorted.erase(sorted.begin() + index);
-          }
-           //sorted.push_back({names[i], state, weight});
-       }
-            // if(weight > max_weight){
-            //          auto iterator = std::find_if(sorted.begin(), sorted.end(), [&](const Sorted& p) {
-            //             return p.weight == max_weight;
-            //             });
-            //           if (iterator == sorted.end()) {
-            //             // the id wasn't found
-            //           } else {
-            //               iterator->name = names[i];
-            //               iterator->id = i;
-            //               iterator->weight = weight;
-            //               int index = std::distance(sorted.begin(), iterator);
-            //               cout << "ID: " << index<< endl;
-            //               sorted.erase(sorted.begin() + index);
-            //           }
-            //     }
-        auto minmax_values = std::minmax_element(sorted.begin(), sorted.end(),[]
-        (Sorted const& lhs, Sorted const& rhs) {return lhs.id < rhs.id;});
-        max_weight = minmax_values.second->weight;
+       } else if (state < dict){
+           for(int j=0; j<alphabets.size(); j++){
+                   flag = 0; count=0; update = 0;
+                   while(count < (names[i].length())){
+                       if(alphabets[j] != names[i][count]){
+                           flag++;
+                       }
+                       count++;
+                   }
+                   if(flag > g_flag){
+                       g_flag = flag;
+                   }
+                }
+                if(g_flag == names[i].length()){
+                     if(unique != 0){
+                       sorted.push_back({names[i], unique, dict-state});
+                    }
+                } else {
+                    //   sorted.clear();
+                    //   sorted.push_back({names[i], unique, dict-state});   
+                }
+           if(names[i].length() != dict){
+               
+           }
+           //sorted.push_back({names[i], unique, dict-state});
+       } 
         dict = dict + unique;
     }
-    
-    for(int i=0; i<sorted.size(); i++){
-       //int 
-    }
-       
     return sorted;
 }
 
 void printOutput(const vector<Sorted> &output){
+    string arr[output.size()];
+    int size = output.size();
     cout << "short-listed array of names:" << endl;
     for(int i=0; i<output.size(); i++){
-        cout << "name: " << output[i].name << " ID: " << output[i].id << " weight: " << output[i].weight << "\n";
+        cout << output[i].name << " ";
     }
 }
+
+
+
+
+
