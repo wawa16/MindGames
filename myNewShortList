@@ -38,7 +38,7 @@ vector<string> shortList(string names[], int &size){
        int count = 0;    //local counter for alphabets in each name
        int state = 0;    //counter decides which names to be included in shortlist
        int unique = 0;   //counter for unique letters in a name; 
-       int flag = 0;
+       int flag = 0; int update; int g_flag = 0;
        //scan through alphabets in each name:
        while(count < names[i].length()){                  
        //check if current alphabet exists in our alphabets vector, if doen't then add it
@@ -53,19 +53,26 @@ vector<string> shortList(string names[], int &size){
        if(state >= dict){
            if(short_list.size() != 0){
                for(int j=0; j<alphabets.size(); j++){
-                   flag = false; count=0;
+                   flag = 0; count=0; update = 0;
                    while(count < (names[i].length())){
                        if(alphabets[j] != names[i][count]){
                            flag++;
                        }
                        count++;
                    }
-                   if(flag != names[i].length()){
-                        short_list.clear();
-                        short_list.push_back(names[i]);
+                   if(flag > g_flag){
+                       g_flag = flag;
                    }
-               }
-          
+                }
+                if(g_flag == names[i].length()){
+                    update = 1;
+                } else {update = 0;}
+                //cout << flag << endl;
+                
+                if(update != 1){
+                    short_list.clear();
+                    short_list.push_back(names[i]);          
+                }
            } else {
                 short_list.push_back(names[i]);
            }
@@ -74,7 +81,6 @@ vector<string> shortList(string names[], int &size){
        }
        
        dict = dict + unique;
-       cout << state << " ";
     }
     return short_list;
 }
