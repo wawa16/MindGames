@@ -13,7 +13,35 @@ struct Sorted {
 void printOutput(const vector<Sorted> &);      //prints sorted output
 vector<Sorted> shortList(string[], int &size); //sorting function
 void arrange(string[], int &size);
+bool checkval(const vector<Sorted> &, string &elem);
 
+bool checkval(const vector<Sorted> &output, string &elem){
+    bool flag; int state = 0;
+    std::vector<char> vec;
+    for(int i=0;i<output.size();i++){
+        int j = 0; int count = 0; 
+        while(j < output[i].name.length()){
+            if(output[i].name != elem){
+            vec.push_back(output[i].name[j]);
+              }
+              j++;
+            }
+        }
+        
+        for(int count=0;count < elem.length();count++){                  
+       //check if current alphabet exists in our alphabets vector, if doen't then add it
+           if(std::find(vec.begin(), vec.end(), elem[count]) != vec.end()) {
+               state++;
+            } 
+       }
+       if(state == elem.length()){
+             state = 0;
+            return true;
+         } else {
+             return false;
+             }
+
+}
 
 int main()
 {
@@ -22,7 +50,7 @@ int main()
     //string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
      // string names[4] = {"dolly", "bab","bay", "ash"}; //Input Array of names
     //string names[6] = {"daf","bab", "c", "cab", "a", "b"};
-    string names[4] = { "edd", "waleed", "lisa", "isac" };
+    string names[4] = { "edd", "lisa", "waleed", "isac"};
      //string names[4] = {"noah", "john", "joan", "deb"};
      
      //string names[4] = {"sea", "rose", "roseland", "and"};
@@ -127,36 +155,31 @@ vector<Sorted> shortList(string names[], int &size){
         dict = dict + unique;
     }
     
-    string arr[sorted.size()];
     int count = 0; int flag = 0; 
-
-     for(int i=0; i<sorted.size(); i++){
     
-         int g_flag = 0; int y=0; int elem_size = sorted[i].name.length();
-         if(sorted[i].name != sorted[sorted.size()-1].name){
-         for(int j=0; j<sorted[i].name.length(); j++){
-             flag = 0; count=0; y = 0;
-         while(y != i){
-          while(count < (sorted[i].name.length()) ){
-            
-            if(sorted[i].name[j] != sorted[y].name[count]){
-               flag++; 
+     for(int i=0; i<sorted.size(); i++){
+        if(checkval(sorted, sorted[i].name)){
+            cout << "Erase: " << sorted[i].name << " ";
             }
-              count++;
-           }
-           y++;
-            cout << sorted[i].name << " " << y << " G_Flag: " << g_flag;
-               if(flag > g_flag){
-                g_flag = flag;
-                }
-             if(g_flag != elem_size){
-                sorted.erase(sorted.begin() + i);
-             }  
-         }
-        
-         }
-                   
-         }
+        //  int g_flag = 0; int elem_size = sorted[i].name.length();
+        //  if(sorted[i].name != sorted[sorted.size()-1].name){
+        //  for(int j=0; j<sorted[i].name.length(); j++){
+        //      flag = 0; count=0;
+        //   while(count < (sorted[i].name.length())){
+        //     if(sorted[i].name[j] != sorted[i+1].name[count]){
+        //       flag++; 
+        //     }
+        //       count++;
+        //   }
+        //     if(flag > g_flag){
+        //         g_flag = flag;
+        //     }
+            
+        //  }
+        //     if(g_flag != elem_size){
+        //         sorted.erase(sorted.begin() + i);
+        //     }          
+        //  }
         }
     return sorted;
 }
