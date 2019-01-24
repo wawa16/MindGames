@@ -18,24 +18,33 @@ void arrange(string[], int &size);
 int main()
 {
     
-    string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
-   // string names[6] = {"bab","bay", "ash", "doll", "dolla", "dolly"}; //Input Array of names
+    //string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
+      //string names[5] = {"dolly", "bab","bay", "ash", "dolla"}; //Input Array of names
+    string names[6] = {"daf","bab", "c", "cab", "a", "b"};
+     //string names[5] = {"a","b", "bab"};
+     
     int size = sizeof(names)/sizeof(names[0]);
     arrange(names, size);
     return 0;
 }
 
 void arrange(string arr[], int &size){
-    int i,j;
-       for(j=0; j<size-1; j++){
-            for(i=0; i<size-1; i++){
-             if(arr[i] > arr[i+1]){
-                string z = arr[i];
-                arr[i] = arr[i+1];
-                arr[i+1] = z;
-             }
-        }
-      }
+    for (int i=1; i<size; i++) 
+        { 
+        string temp = arr[i]; 
+        int j = i - 1; 
+        while (j >= 0 && temp.length() > arr[j].length()) 
+         { 
+            arr[j+1] = arr[j]; 
+            j--; 
+          } 
+            arr[j+1] = temp; 
+        } 
+        
+    //   for(int m = 0; m<size; m++){
+    //       cout << arr[m] << " "; 
+    //   }
+    //   cout << endl; 
     printOutput(shortList(arr,size));       
 }
 
@@ -123,12 +132,32 @@ vector<Sorted> shortList(string names[], int &size){
 
 void printOutput(const vector<Sorted> &output){
     string arr[output.size()];
-    int size = output.size();
+    int size = output.size(); int count = 0; int flag = 0;
+     for(int i=0; i<output.size(); i++){
+         for(int j=0; j<output[i].name.length(); j++){
+             flag = 0; count=0;
+          while(count < (output[i].name.length())){
+            // if(output[i].name[j] = output[i+1].name[count]){
+                
+            // }
+              count++;
+           }
+            if(flag > g_flag){
+                g_flag = flag;
+            }
+                     cout << " " << output[i].name.length() << endl;
+         }
+       
+        }
+ 
+    
     cout << "short-listed array of names:" << endl;
     for(int i=0; i<output.size(); i++){
-        cout << output[i].name << " ";
+        cout << output[i].name << " " << output[i].id << " " << output[i].weight << endl;
     }
 }
+
+
 
 
 
