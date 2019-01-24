@@ -127,29 +127,39 @@ vector<Sorted> shortList(string names[], int &size){
        } 
         dict = dict + unique;
     }
-    return sorted;
-}
+    
+    string arr[sorted.size()];
+    int count = 0; int flag = 0; 
 
-void printOutput(const vector<Sorted> &output){
-    string arr[output.size()];
-    int size = output.size(); int count = 0; int flag = 0;
-     for(int i=0; i<output.size(); i++){
-         for(int j=0; j<output[i].name.length(); j++){
+     for(int i=0; i<sorted.size(); i++){
+    
+         int g_flag = 0; int elem_size = sorted[i].name.length();
+         if(sorted[i].name != sorted[sorted.size()-1].name){
+         for(int j=0; j<sorted[i].name.length(); j++){
              flag = 0; count=0;
-          while(count < (output[i].name.length())){
-            // if(output[i].name[j] = output[i+1].name[count]){
-                
-            // }
+          while(count < (sorted[i].name.length())){
+            if(sorted[i].name[j] != sorted[i+1].name[count]){
+               flag++; 
+            }
               count++;
            }
             if(flag > g_flag){
                 g_flag = flag;
             }
-                     cout << " " << output[i].name.length() << endl;
+            
          }
+            if(g_flag != elem_size){
+                sorted.erase(sorted.begin() + i);
+            }          
+         }
+   
        
         }
  
+    return sorted;
+}
+
+void printOutput(const vector<Sorted> &output){
     
     cout << "short-listed array of names:" << endl;
     for(int i=0; i<output.size(); i++){
