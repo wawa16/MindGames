@@ -4,7 +4,7 @@
 
 using namespace std;
 
-struct Sorted {
+struct Sorted {                    ///no need for struct (this for experimenting), simple 1D vector would suffice  
     std::string name;
     int id;
     int weight;
