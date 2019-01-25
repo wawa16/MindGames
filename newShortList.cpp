@@ -67,7 +67,7 @@ void arrange(string arr[], int &size){
 vector<string> shortList(string names[], int &size){
      std::vector<char> alphabets;            //vector stores alphabets from names
      std::vector<string> sorted;
-     int dict = 0;                           //dictionary counter
+     int dict = 0;                           //dictionary counter updates at each name iteration
 
        for(int i=0; i<size; i++){
        unsigned int count = 0;               //local counter for alphabets in each name
@@ -84,7 +84,7 @@ vector<string> shortList(string names[], int &size){
        }
        unique = names[i].length() - state;            //calculates no. of unique chars
        
-       if(state >= dict){                             //state = frequency of chars in word occuring in dictionary
+       if(state >= dict){                             //state = words occuring in dictionary
            if(sorted.size() != 0){
                for(int j=0; j<alphabets.size(); j++){
                    flag = 0; count=0;
