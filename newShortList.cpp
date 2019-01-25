@@ -49,7 +49,7 @@ int main()
 }
 
 void arrange(string arr[], int &size){
-    for (int i=1; i<size; i++)               //arrange initial array with word sizes in ascending order
+    for (int i=1; i<size; i++)              
         { 
         string temp = arr[i]; 
         int j = i - 1; 
