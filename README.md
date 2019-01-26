@@ -9,11 +9,7 @@ Traverse a userdefined or sample binary tree inorder (leftmost, root finally rig
     -Both a sample Tree and a user-input tree are allowed.<br/>
   
 # Task#2: Short List names
-As I understood that day, a function that sorts names in array, any new name if contains alphabets that are in the names stored earlier are dynamically omitted, but new names with any unique alphabet are shortlisted.<br/>
-  Approach:<br/>
-  -Using vector class, for dynamic string array allocation.<br/> 
-  -Option to collect user-input allowed along with sample data.<br/>
-  -Two different ways are included for sorting, both yield same result.<br/>
+Program that short lists names in array e.g. {"a","b","bab"}--returns--> "bab"
   
 # Note: Pls contact if something needs clarity
   -version preferred C++11
