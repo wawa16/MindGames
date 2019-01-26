@@ -18,13 +18,11 @@ bool checkval(const vector<string> &output, string &elem){
             if(output[i] != elem){
             vec.push_back(output[i][j]);
               }
-              j++;
-            }
+              j++;}
         }
         for(unsigned int count=0;count < elem.length();count++){                  
            if(std::find(vec.begin(), vec.end(), elem[count]) != vec.end()) {
-               state++;
-            } 
+               state++;} 
        }
        if(state == elem.length()){
             state = 0; return true;} else {return false;}
@@ -49,18 +47,13 @@ int main()
 }
 
 void arrange(string arr[], int &size){
-    for (int i=1; i<size; i++)              
-        { 
-        string temp = arr[i]; 
-        int j = i - 1; 
-        while (j >= 0 && temp.length() > arr[j].length()) 
-         { 
+    for (int i=1; i<size; i++){ 
+        string temp = arr[i];int j = i - 1; 
+        while (j >= 0 && temp.length() > arr[j].length()){ 
             arr[j+1] = arr[j]; 
-            j--; 
-          } 
+            j--;} 
             arr[j+1] = temp; 
-        } 
-
+        }
     printOutput(shortList(arr,size));       //pass arranged array to sorting algorithm
 }
 
@@ -83,17 +76,14 @@ vector<string> shortList(string names[], int &size){
             count++;
        }
        unique = names[i].length() - state;            //calculates no. of unique chars
-       
-                                //state = words occuring in dictionary
+           
            if(sorted.size() != 0){
                for(int j=0; j<alphabets.size(); j++){
                    flag = 0; count=0;
                    while(count < (names[i].length())){
                        if(alphabets[j] != names[i][count]){
-                           flag++;
-                       }
-                       count++;
-                   }
+                           flag++;}
+                       count++;}
                    if(flag > g_flag){
                        g_flag = flag;
                    }
@@ -108,15 +98,12 @@ vector<string> shortList(string names[], int &size){
                       sorted.clear();
                       sorted.push_back(names[i]);   
                 }
-           } else {
-                sorted.push_back(names[i]);
-           }
+           } else {sorted.push_back(names[i]);}
         dict = dict + unique;                                  //updates dictionary with unique chars
     }
      for(unsigned int i=0; i<sorted.size(); i++){              //final Check for redundant elements to be erased
         if(checkval(sorted, sorted[i])){
-             sorted.erase(sorted.begin() + i);
-            }
+             sorted.erase(sorted.begin() + i);}
         }
     return sorted;
 }
@@ -124,6 +111,5 @@ vector<string> shortList(string names[], int &size){
 void printOutput(const vector<string> &output){
     cout << "short-listed array of names:" << endl;
     for(unsigned int i=0; i<output.size(); i++){
-        cout << output[i] << " ";
-    }
+        cout << output[i] << " ";}
 }
