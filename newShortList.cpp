@@ -33,11 +33,11 @@ bool checkval(const vector<string> &output, string &elem){
 int main()
 {
     ////////SAMPLE TEST CASES://///////////////////////////////////////////
-         //string names[5] = {"a","b", "bab"};
-         //string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
-         //string names[4] = {"dolly", "bab","bay", "ash"}; //Input Array of names
+        // string names[5] = {"a","b", "bab"};
+        // string names[9] = {"a","b", "ab", "bab", "babel", "bebe", "bf", "c", "beb"}; //Input Array of names
+        // string names[4] = {"dolly", "bab","bay", "ash"}; //Input Array of names
          //string names[6] = {"daf","bab", "c", "cab", "a", "b"};
-         //string names[4] = { "edd", "lisa", "waleed", "isac"};
+        // string names[4] = { "edd", "lisa", "waleed", "isac"};
          //string names[4] = {"noah", "john", "joan", "deb"};
          //string names[5] = {"mikel", "micheal", "ulrich", "martha", "jonah"};
      
@@ -84,7 +84,7 @@ vector<string> shortList(string names[], int &size){
        }
        unique = names[i].length() - state;            //calculates no. of unique chars
        
-       if(state >= dict){                             //state = words occuring in dictionary
+                                //state = words occuring in dictionary
            if(sorted.size() != 0){
                for(int j=0; j<alphabets.size(); j++){
                    flag = 0; count=0;
@@ -99,9 +99,11 @@ vector<string> shortList(string names[], int &size){
                    }
                 }
                 if(g_flag == names[i].length()){
-                     if(unique != 0){
-                       sorted.push_back(names[i]);
-                    }
+                         if(state < dict && unique != 0){
+                          sorted.push_back(names[i]);
+                        } else if(state >= dict){
+                            sorted.push_back(names[i]);
+                        }
                 } else {
                       sorted.clear();
                       sorted.push_back(names[i]);   
@@ -109,26 +111,6 @@ vector<string> shortList(string names[], int &size){
            } else {
                 sorted.push_back(names[i]);
            }
-   
-       } else if (state < dict){
-           for(unsigned int j=0; j<alphabets.size(); j++){
-                   flag = 0; count=0;
-                   while(count < (names[i].length())){
-                       if(alphabets[j] != names[i][count]){
-                           flag++;
-                       }
-                       count++;
-                   }
-                   if(flag > g_flag){
-                       g_flag = flag;
-                   }
-                }
-                if(g_flag == names[i].length()){
-                     if(unique != 0){
-                       sorted.push_back(names[i]);
-                    }
-                }
-       } 
         dict = dict + unique;                                  //updates dictionary with unique chars
     }
      for(unsigned int i=0; i<sorted.size(); i++){              //final Check for redundant elements to be erased
