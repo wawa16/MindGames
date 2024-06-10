@@ -1,5 +1,5 @@
-# AKinterviewTasks
-Short listing names and Binary tree scripts
+# MindGames
+Programs for fun and practice
 
 # Task#1: Binary Tree Traversal
 Traverse a userdefined or sample binary tree inorder (leftmost, root finally right child).<br/>
